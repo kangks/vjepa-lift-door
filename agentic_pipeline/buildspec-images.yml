@@ -1,0 +1,164 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - |
+        set -euo pipefail
+        df -h > /tmp/df_before.txt
+        docker version > /tmp/docker_version.txt
+        uname -m | tee /tmp/arch.txt
+        test "$(cat /tmp/arch.txt)" = "aarch64"
+
+  pre_build:
+    commands:
+      - |
+        set -euo pipefail
+        mkdir -p /tmp/ckpt
+        aws ecr get-login-password --region "$REGION" |
+          docker login --username AWS --password-stdin "$ACCOUNT.dkr.ecr.$REGION.amazonaws.com"
+        aws s3 cp "s3://$BUCKET/models/vjepa21/vitl_ema_encoder_only.pt" /tmp/ckpt/
+        sha256sum /tmp/ckpt/vitl_ema_encoder_only.pt | tee /tmp/ckpt_sha.txt
+        test "$(cut -d' ' -f1 /tmp/ckpt_sha.txt)" = \
+          "06248f29136a5d26c30e466d717d8845c25341e220f500468c0c162a3317cf20"
+
+  build:
+    commands:
+      - |
+        set -euo pipefail
+        docker build -f services/embed/Dockerfile -t "$REPO_EMBED:$IMAGE_TAG" .
+        docker build -f services/knn/Dockerfile -t "$REPO_KNN:$IMAGE_TAG" .
+        docker build -f services/ticket/Dockerfile -t "$REPO_TICKET:$IMAGE_TAG" .
+        docker build -f services/coordinator/Dockerfile -t "$REPO_COORDINATOR:$IMAGE_TAG" .
+
+        # BuildSpec has no top-level test phase; execute image and host tests here.
+        mkdir -p /tmp/store
+        docker rm -f lda-embed-health >/dev/null 2>&1 || true
+        trap 'docker rm -f lda-embed-health >/dev/null 2>&1 || true' EXIT
+        docker run -d --name lda-embed-health -p 18080:8080 \
+          -v /tmp/ckpt:/ckpt:ro -v /tmp/store:/store \
+          -e LDA_STORAGE=file:/store \
+          -e LDA_CKPT_PATH=/ckpt/vitl_ema_encoder_only.pt \
+          -e LDA_CKPT_SHA256=06248f29136a5d26c30e466d717d8845c25341e220f500468c0c162a3317cf20 \
+          -e LDA_OTEL_MODE=console "$REPO_EMBED:$IMAGE_TAG" >/tmp/embed_container_id.txt
+        : > /tmp/health.txt
+        health_code=000
+        for i in $(seq 1 120); do
+          health_code=$(curl -s -o /tmp/h.json -w '%{http_code}' localhost:18080/health || true)
+          echo "$i $health_code" | tee -a /tmp/health.txt
+          [ "$health_code" = "200" ] && break
+          sleep 5
+        done
+        cat /tmp/h.json >> /tmp/health.txt
+        docker logs lda-embed-health >> /tmp/embed_health_logs.txt 2>&1 || true
+        docker rm -f lda-embed-health >/dev/null
+        trap - EXIT
+        test "$health_code" = "200"
+        python3 - <<'PY'
+        import json
+        from pathlib import Path
+        health = json.loads(Path("/tmp/h.json").read_text())
+        assert health["ckpt_sha256"] == "06248f29136a5d26c30e466d717d8845c25341e220f500468c0c162a3317cf20"
+        assert "torch_threads" in health
+        assert "cpu_count" in health
+        PY
+
+        docker run --rm --entrypoint python "$REPO_KNN:$IMAGE_TAG" \
+          -c "import lda_core; import services.knn.handler"
+        docker run --rm --entrypoint python "$REPO_TICKET:$IMAGE_TAG" \
+          -c "import lda_core; import services.ticket.handler"
+        docker run --rm --entrypoint python "$REPO_COORDINATOR:$IMAGE_TAG" \
+          -c "import lda_core; import services.coordinator.main"
+
+        python3.11 -m venv .venv
+        .venv/bin/python -m pip install \
+          -r requirements-core.txt -r requirements-test.txt \
+          boto3 requests fastapi httpx pyyaml anthropic==2.3.0 \
+          aws-opentelemetry-distro==0.22.0 \
+          opentelemetry-instrumentation-fastapi \
+          opentelemetry-instrumentation-requests \
+          opentelemetry-instrumentation-botocore
+        .venv/bin/python -m pytest -q -s -m "not slow" 2>&1 | tee /tmp/pytest.txt
+        P_PYTEST=$(grep -i '^pytest' requirements-test.txt)
+        test -n "$P_PYTEST"
+        TEST_ROOT=/workspace/sydney_physical_ai_october2026/workshop/lift-door/agentic
+        docker run --rm -v /tmp/ckpt:/ckpt:ro -v "$PWD:$TEST_ROOT:ro" \
+          -e LDA_CKPT_PATH=/ckpt/vitl_ema_encoder_only.pt \
+          -e LDA_CKPT_SHA256=06248f29136a5d26c30e466d717d8845c25341e220f500468c0c162a3317cf20 \
+          -e LDA_REQUIRE_CKPT=1 \
+          -e LDA_TEST_CLIP="$TEST_ROOT/fixtures/healthy_clean.mp4" \
+          -e PYTHONPATH="$TEST_ROOT" -e PYTHONDONTWRITEBYTECODE=1 \
+          --entrypoint sh "$REPO_EMBED:$IMAGE_TAG" \
+          -c "pip install --user -q $P_PYTEST && python -m pytest -q -s -p no:cacheprovider -m 'slow or perm' $TEST_ROOT/tests/test_embed_inprocess.py $TEST_ROOT/tests/test_encoder_smoke.py" \
+          | tee /tmp/pytest_inimage_embed.txt
+        docker run --rm -v "$PWD:$TEST_ROOT:ro" -e PYTHONPATH="$TEST_ROOT" \
+          -e PYTHONDONTWRITEBYTECODE=1 -e LDA_REQUIRE_CKPT=1 \
+          --entrypoint sh "$REPO_COORDINATOR:$IMAGE_TAG" \
+          -c "pip install --user -q $P_PYTEST && python -m pytest -q -s -p no:cacheprovider -m perm $TEST_ROOT/tests/test_run_dir_ownership.py" \
+          | tee /tmp/pytest_inimage_coordinator.txt
+
+  post_build:
+    commands:
+      - |
+        aws s3 cp /tmp/ "s3://$BUCKET/build/out/$IMAGE_TAG/" --recursive \
+          --exclude "*" --include "*.txt" || true
+      - |
+        test "$CODEBUILD_BUILD_SUCCEEDING" = "1" || {
+          echo "build failed - no push"
+          exit 1
+        }
+      - docker push "$REPO_EMBED:$IMAGE_TAG"
+      - docker push "$REPO_KNN:$IMAGE_TAG"
+      - docker push "$REPO_TICKET:$IMAGE_TAG"
+      - docker push "$REPO_COORDINATOR:$IMAGE_TAG"
+      - |
+        set -euo pipefail
+        docker image ls --format '{{.Repository}}:{{.Tag}} {{.Size}}' |
+          grep -E "^(${REPO_EMBED}|${REPO_KNN}|${REPO_TICKET}|${REPO_COORDINATOR}):${IMAGE_TAG} " \
+          > /tmp/sizes.txt
+        docker run --rm --entrypoint sh "$REPO_EMBED:$IMAGE_TAG" \
+          -c "ffmpeg -version | head -3" > /tmp/ffmpeg.txt
+        docker run --rm --entrypoint python "$REPO_EMBED:$IMAGE_TAG" \
+          -m pip list --format=freeze > /tmp/pip_embed.txt
+        for pair in "embed:$REPO_EMBED" "knn:$REPO_KNN" \
+          "ticket:$REPO_TICKET" "coordinator:$REPO_COORDINATOR"; do
+          service=${pair%%:*}
+          repo=${pair#*:}
+          docker run --rm --entrypoint python "$repo:$IMAGE_TAG" \
+            -m pip freeze > "/tmp/pip_freeze_${service}.txt"
+        done
+        docker run --rm --entrypoint sh "$REPO_EMBED:$IMAGE_TAG" \
+          -c "dpkg -l ffmpeg libtiff6" > /tmp/dpkg_embed.txt
+        df -h > /tmp/df_after.txt
+        DIGEST_EMBED=$(docker inspect --format '{{index .RepoDigests 0}}' "$REPO_EMBED:$IMAGE_TAG")
+        DIGEST_KNN=$(docker inspect --format '{{index .RepoDigests 0}}' "$REPO_KNN:$IMAGE_TAG")
+        DIGEST_TICKET=$(docker inspect --format '{{index .RepoDigests 0}}' "$REPO_TICKET:$IMAGE_TAG")
+        DIGEST_COORDINATOR=$(docker inspect --format '{{index .RepoDigests 0}}' "$REPO_COORDINATOR:$IMAGE_TAG")
+        python3 - "$IMAGE_TAG" "$SRC_SHA256" "$CODEBUILD_BUILD_ID" \
+          "$REPO_EMBED" "$DIGEST_EMBED" "$REPO_KNN" "$DIGEST_KNN" \
+          "$REPO_TICKET" "$DIGEST_TICKET" "$REPO_COORDINATOR" "$DIGEST_COORDINATOR" <<'PY'
+        import json
+        import re
+        import sys
+        tag, source_sha, build_id = sys.argv[1:4]
+        items = sys.argv[4:]
+        images = {}
+        for index in range(0, len(items), 2):
+            repo, digest = items[index:index + 2]
+            assert re.fullmatch(r".+@sha256:[0-9a-f]{64}", digest), (repo, digest)
+            name = repo.rsplit("/", 1)[-1]
+            service = name[4:] if name.startswith("lda-") else name
+            images[service] = {"repo": repo, "tag": tag, "digest": digest}
+        with open("/tmp/images.json", "w") as output:
+            json.dump({"tag": tag, "source_zip_sha256": source_sha,
+                       "build_id": build_id, "images": images}, output, indent=2)
+            output.write("\n")
+        PY
+        for file in sizes ffmpeg pip_embed pip_freeze_embed pip_freeze_knn \
+          pip_freeze_ticket pip_freeze_coordinator dpkg_embed df_after images; do
+          if [ "$file" = "images" ]; then
+            aws s3 cp /tmp/images.json "s3://$BUCKET/build/out/$IMAGE_TAG/images.json"
+          else
+            aws s3 cp "/tmp/$file.txt" "s3://$BUCKET/build/out/$IMAGE_TAG/$file.txt"
+          fi
+        done

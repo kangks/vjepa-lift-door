@@ -1,0 +1,10 @@
+aws-cdk-lib==2.258.0
+constructs==10.8.1
+cdk-nag==2.38.2
+pytest==9.2.0
+PyYAML==6.0.3
+numpy==1.26.4
+pillow==13.0.0
+jsonschema==4.26.0
+requests==2.34.2
+opentelemetry-sdk==1.45.1

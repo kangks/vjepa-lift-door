@@ -1,0 +1,16 @@
+{
+  "app": ".venv/bin/python app.py",
+  "context": {
+    "region": "us-east-1",
+    "azs": "us-east-1a,us-east-1b",
+    "budgetUsd": 20,
+    "alertEmail": "<EMAIL>m",
+    "@aws-cdk/core:checkSecretUsage": true,
+    "@aws-cdk/core:validateSnapshotRemovalPolicy": true,
+    "@aws-cdk/aws-ec2:restrictDefaultSecurityGroup": false,
+    "@aws-cdk/aws-ecs:arnFormatIncludesClusterName": true,
+    "@aws-cdk/aws-ecs:enableImdsBlockingDeprecatedFeature": true,
+    "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
+    "@aws-cdk/aws-iam:minimizePolicies": true
+  }
+}

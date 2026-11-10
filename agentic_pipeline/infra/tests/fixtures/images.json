@@ -1,0 +1,24 @@
+{
+  "images": {
+    "embed": {
+      "repo": "example.invalid/lda-embed",
+      "tag": "src-000000000000",
+      "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "knn": {
+      "repo": "example.invalid/lda-knn",
+      "tag": "src-000000000000",
+      "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "ticket": {
+      "repo": "example.invalid/lda-ticket",
+      "tag": "src-000000000000",
+      "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "coordinator": {
+      "repo": "example.invalid/lda-coordinator",
+      "tag": "src-000000000000",
+      "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    }
+  }
+}

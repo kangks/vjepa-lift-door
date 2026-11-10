@@ -1,0 +1,3901 @@
+{
+ "frozen_design_v2_sha256": "7835561bae3c77aef226a447aab1d24ff3f48f2b2b27d1ef80d6556c8ce8ff1e",
+ "detectors": {
+  "D_patchKNN": {
+   "global": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 0.45671346783638,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 0.45312821865081787,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 0.4659920632839203,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      8,
+      20
+     ],
+     "max_score_over_tau": 0.36291345953941345,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      1,
+      21
+     ],
+     "max_score_over_tau": 0.36005935072898865,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      1,
+      14
+     ],
+     "max_score_over_tau": 0.8487571477890015,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      4,
+      17
+     ],
+     "max_score_over_tau": 0.9612462520599365,
+     "post_hoc": false
+    }
+   },
+   "envelope": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 18.83441734313965,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 34,
+     "false_alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25,
+      8.5,
+      8.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      15.0,
+      15.25,
+      15.5,
+      15.75
+     ],
+     "alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25,
+      8.5,
+      8.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25,
+      15.0,
+      15.25,
+      15.5,
+      15.75
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 17.340858459472656,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 4,
+     "false_alert_times_s": [
+      0.5,
+      0.75,
+      1.0,
+      1.25
+     ],
+     "alert_times_s": [
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 20.12021255493164,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 12,
+     "false_alert_times_s": [
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      14.25
+     ],
+     "alert_times_s": [
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      12.0,
+      12.25,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      1,
+      21
+     ],
+     "max_score_over_tau": 13.784120559692383,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 7,
+     "false_alert_times_s": [
+      3.5,
+      3.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      14.25
+     ],
+     "alert_times_s": [
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      1,
+      21
+     ],
+     "max_score_over_tau": 16.128158569335938,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 22,
+     "false_alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25
+     ],
+     "alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      7,
+      13
+     ],
+     "max_score_over_tau": 52.4787712097168,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 20,
+     "false_alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      5.0,
+      5.25,
+      5.5,
+      7.25,
+      7.5,
+      7.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      6,
+      15
+     ],
+     "max_score_over_tau": 18.013675689697266,
+     "post_hoc": false
+    }
+   }
+  },
+  "D_patchKNN_t1": {
+   "global": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      15,
+      12
+     ],
+     "max_score_over_tau": 0.2388637214899063,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      11
+     ],
+     "max_score_over_tau": 0.21525712311267853,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      10
+     ],
+     "max_score_over_tau": 0.2259816974401474,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      6,
+      22
+     ],
+     "max_score_over_tau": 0.3476218283176422,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      6,
+      22
+     ],
+     "max_score_over_tau": 0.3319348692893982,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      4,
+      15
+     ],
+     "max_score_over_tau": 0.8426099419593811,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      2,
+      2
+     ],
+     "max_score_over_tau": 0.894730269908905,
+     "post_hoc": false
+    }
+   },
+   "envelope": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      10
+     ],
+     "max_score_over_tau": 10.862776756286621,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 30,
+     "false_alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25,
+      8.5,
+      8.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      11.5,
+      11.75,
+      12.0,
+      12.25,
+      15.0,
+      15.25,
+      15.5,
+      15.75
+     ],
+     "alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25,
+      8.5,
+      8.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      11.5,
+      11.75,
+      12.0,
+      12.25,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25,
+      15.0,
+      15.25,
+      15.5,
+      15.75
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      10
+     ],
+     "max_score_over_tau": 11.130504608154297,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 4,
+     "false_alert_times_s": [
+      0.5,
+      0.75,
+      1.0,
+      1.25
+     ],
+     "alert_times_s": [
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      10
+     ],
+     "max_score_over_tau": 12.23254108428955,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 23,
+     "false_alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      11.5,
+      11.75
+     ],
+     "alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      11.5,
+      11.75,
+      12.0,
+      12.25,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      1,
+      21
+     ],
+     "max_score_over_tau": 10.365138053894043,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 3,
+     "false_alert_times_s": [
+      3.5,
+      3.75,
+      14.25
+     ],
+     "alert_times_s": [
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      13,
+      6
+     ],
+     "max_score_over_tau": 11.262508392333984,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 22,
+     "false_alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25
+     ],
+     "alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      7,
+      13
+     ],
+     "max_score_over_tau": 50.43350601196289,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 10,
+     "false_alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      5.0,
+      5.25,
+      5.5,
+      7.25,
+      7.5,
+      7.75
+     ],
+     "alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75
+     ],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      6,
+      15
+     ],
+     "max_score_over_tau": 44.36042404174805,
+     "post_hoc": false
+    }
+   }
+  },
+  "D_clipNN": {
+   "global": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 0.45652151107788086,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 0.4675731360912323,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 0.47088733315467834,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      4,
+      22
+     ],
+     "max_score_over_tau": 0.4440772831439972,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      7,
+      22
+     ],
+     "max_score_over_tau": 0.42716917395591736,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      4,
+      15
+     ],
+     "max_score_over_tau": 0.915198028087616,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 6.5,
+     "peak_block_xy": [
+      18,
+      17
+     ],
+     "max_score_over_tau": 0.9533402323722839,
+     "post_hoc": false
+    }
+   },
+   "envelope": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 18,
+     "false_alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      4.0,
+      4.25,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      11.0,
+      11.25,
+      11.5,
+      11.75
+     ],
+     "alert_times_s": [
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      11.0,
+      11.25,
+      11.5,
+      11.75,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 15.110843658447266,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 36,
+     "false_alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25,
+      8.5,
+      8.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      12.0,
+      12.25,
+      15.0,
+      15.25,
+      15.5,
+      15.75
+     ],
+     "alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25,
+      8.5,
+      8.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      12.0,
+      12.25,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      15.0,
+      15.25,
+      15.5,
+      15.75
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 15.305835723876953,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 34,
+     "false_alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      8.5,
+      8.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      11.0,
+      11.25,
+      11.5,
+      11.75,
+      12.0,
+      12.25
+     ],
+     "alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      8.5,
+      8.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      11.0,
+      11.25,
+      11.5,
+      11.75,
+      12.0,
+      12.25,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      6
+     ],
+     "max_score_over_tau": 15.312508583068848,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 16,
+     "false_alert_times_s": [
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      6.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      14.25
+     ],
+     "alert_times_s": [
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      10.5,
+      10.75,
+      12.0,
+      12.25,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      1,
+      21
+     ],
+     "max_score_over_tau": 8.127464294433594,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 16,
+     "false_alert_times_s": [
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      3.5,
+      3.75,
+      6.25,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      14.25
+     ],
+     "alert_times_s": [
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      12.0,
+      12.25,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      1,
+      21
+     ],
+     "max_score_over_tau": 8.759605407714844,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 42,
+     "false_alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25,
+      14.5,
+      14.75
+     ],
+     "alert_times_s": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      2.5,
+      2.75,
+      3.0,
+      3.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      8.0,
+      8.25,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25,
+      14.5,
+      14.75
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      7,
+      12
+     ],
+     "max_score_over_tau": 36.93666076660156,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 36,
+     "false_alert_times_s": [
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      5.0,
+      5.25,
+      5.5,
+      7.25,
+      7.5,
+      7.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      12.0,
+      12.25,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25,
+      15.0,
+      15.25,
+      15.5,
+      15.75
+     ],
+     "alert_times_s": [
+      1.0,
+      1.25,
+      1.5,
+      1.75,
+      2.0,
+      2.25,
+      3.5,
+      3.75,
+      4.0,
+      4.25,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75,
+      9.0,
+      9.25,
+      9.5,
+      9.75,
+      10.0,
+      10.25,
+      12.0,
+      12.25,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75,
+      14.0,
+      14.25,
+      15.0,
+      15.25,
+      15.5,
+      15.75
+     ],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      6,
+      15
+     ],
+     "max_score_over_tau": 10.028728485107422,
+     "post_hoc": false
+    }
+   }
+  },
+  "G_pooled": {
+   "global": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.5,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.020357146859169006,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.5,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.007298883516341448,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.5,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.01394831296056509,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.28938308358192444,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.28543680906295776,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 6.5,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.6886688470840454,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 1,
+     "false_alert_times_s": [
+      7.25
+     ],
+     "alert_times_s": [
+      6.5,
+      6.75,
+      7.0,
+      7.25
+     ],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 1.749941349029541,
+     "post_hoc": false
+    }
+   },
+   "envelope": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 9.0,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.0945206880569458,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 1.0,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.03388959541916847,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 9.0,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.0663837268948555,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.9966250061988831,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 1.5,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 1.0064398050308228,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 6,
+     "false_alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25
+     ],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25
+     ],
+     "peak_time_s": 6.0,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 2.604987144470215,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 1,
+     "false_alert_times_s": [
+      7.25
+     ],
+     "alert_times_s": [
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25
+     ],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 2.5944912433624268,
+     "post_hoc": false
+    }
+   }
+  },
+  "pixel_patchKNN": {
+   "global": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 0.08725901693105698,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 0.12122008204460144,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 0.08678741753101349,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      10,
+      13
+     ],
+     "max_score_over_tau": 0.14627061784267426,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      10,
+      13
+     ],
+     "max_score_over_tau": 0.14650267362594604,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 6.5,
+     "peak_block_xy": [
+      15,
+      5
+     ],
+     "max_score_over_tau": 0.32657963037490845,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      3,
+      4
+     ],
+     "max_score_over_tau": 1.127109408378601,
+     "post_hoc": false
+    }
+   },
+   "envelope": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      15,
+      6
+     ],
+     "max_score_over_tau": 5.2422776222229,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 5.222986221313477,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      15,
+      6
+     ],
+     "max_score_over_tau": 5.2221784591674805,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      10,
+      13
+     ],
+     "max_score_over_tau": 518.5361328125,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      10,
+      13
+     ],
+     "max_score_over_tau": 517.6732177734375,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 14,
+     "false_alert_times_s": [
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75
+     ],
+     "alert_times_s": [
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75
+     ],
+     "peak_time_s": 6.0,
+     "peak_block_xy": [
+      15,
+      5
+     ],
+     "max_score_over_tau": 594.4986572265625,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 3,
+     "false_alert_times_s": [
+      7.25,
+      7.5,
+      7.75
+     ],
+     "alert_times_s": [
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75
+     ],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      3,
+      4
+     ],
+     "max_score_over_tau": 63.271392822265625,
+     "post_hoc": false
+    }
+   }
+  },
+  "illum_pixel_patchKNN": {
+   "global": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 0.269158273935318,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 0.26111459732055664,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 0.2686727046966553,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.5,
+     "peak_block_xy": [
+      13,
+      13
+     ],
+     "max_score_over_tau": 0.181825190782547,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 5.5,
+     "peak_block_xy": [
+      13,
+      13
+     ],
+     "max_score_over_tau": 0.1812853217124939,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 6.0,
+     "peak_block_xy": [
+      15,
+      5
+     ],
+     "max_score_over_tau": 0.738732099533081,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [],
+     "peak_time_s": 7.0,
+     "peak_block_xy": [
+      0,
+      0
+     ],
+     "max_score_over_tau": 0.8221427202224731,
+     "post_hoc": false
+    }
+   },
+   "envelope": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 19.222328186035156,
+     "post_hoc": false
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 13.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 17.316556930541992,
+     "post_hoc": false
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": true
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 5.0,
+     "peak_block_xy": [
+      16,
+      5
+     ],
+     "max_score_over_tau": 19.190406799316406,
+     "post_hoc": true
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      12,
+      13
+     ],
+     "max_score_over_tau": 18.772470474243164,
+     "post_hoc": false
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      12.5,
+      12.75,
+      13.0,
+      13.25,
+      13.5,
+      13.75
+     ],
+     "peak_time_s": 4.5,
+     "peak_block_xy": [
+      12,
+      13
+     ],
+     "max_score_over_tau": 18.790327072143555,
+     "post_hoc": false
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 14,
+     "false_alert_times_s": [
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75
+     ],
+     "alert_times_s": [
+      4.5,
+      4.75,
+      5.0,
+      5.25,
+      5.5,
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75
+     ],
+     "peak_time_s": 6.0,
+     "peak_block_xy": [
+      15,
+      5
+     ],
+     "max_score_over_tau": 112.52246856689453,
+     "post_hoc": true
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 3,
+     "false_alert_times_s": [
+      7.25,
+      7.5,
+      7.75
+     ],
+     "alert_times_s": [
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5,
+      7.75
+     ],
+     "peak_time_s": 7.5,
+     "peak_block_xy": [
+      22,
+      1
+     ],
+     "max_score_over_tau": 160.52833557128906,
+     "post_hoc": false
+    }
+   }
+  },
+  "CV_ruleA_door": {
+   "fixed": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": false
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 8,
+     "false_alert_times_s": [
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5
+     ],
+     "alert_times_s": [
+      5.75,
+      6.0,
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25,
+      7.5
+     ]
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    }
+   }
+  },
+  "CV_ruleB_light": {
+   "fixed": {
+    "anomaly_desync_ball_crossing": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "ball_crossing",
+       "start": 2.0,
+       "end": 5.416667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "anomaly_desync_tree_shadow": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      },
+      {
+       "type": "moving_tree_shadow",
+       "start": 0.0,
+       "end": 16.0,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "anomaly_door_desync": {
+     "events": [
+      {
+       "type": "door_desync",
+       "start": 4.916667,
+       "end": 5.833333,
+       "alerted": false
+      },
+      {
+       "type": "door_desync",
+       "start": 12.916667,
+       "end": 13.833333,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "anomaly_interior_flicker_balloon_partial": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      },
+      {
+       "type": "balloon_partial_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 2,
+     "false_alert_times_s": [
+      6.75,
+      7.0
+     ],
+     "alert_times_s": [
+      4.75,
+      5.5,
+      6.75,
+      7.0,
+      13.0
+     ]
+    },
+    "anomaly_interior_light_flicker": {
+     "events": [
+      {
+       "type": "interior_light_flicker",
+       "start": 4.5,
+       "end": 5.708333,
+       "alerted": true
+      },
+      {
+       "type": "interior_light_flicker",
+       "start": 12.5,
+       "end": 13.708333,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": [
+      4.75,
+      5.5,
+      13.0
+     ]
+    },
+    "healthy_ball_reopen": {
+     "events": [
+      {
+       "type": "ball_entered_lift_safe_reopen",
+       "start": 3.708333,
+       "end": 8.041667,
+       "alerted": false
+      }
+     ],
+     "false_alert_samples": 0,
+     "false_alert_times_s": [],
+     "alert_times_s": []
+    },
+    "stress_balloon_full_occlusion": {
+     "events": [
+      {
+       "type": "balloon_full_occlusion",
+       "start": 5.458333,
+       "end": 7.625,
+       "alerted": true
+      }
+     ],
+     "false_alert_samples": 1,
+     "false_alert_times_s": [
+      7.25
+     ],
+     "alert_times_s": [
+      6.25,
+      6.5,
+      6.75,
+      7.0,
+      7.25
+     ]
+    }
+   }
+  }
+ },
+ "post_hoc_clips": [
+  "anomaly_door_desync",
+  "healthy_ball_reopen"
+ ]
+}

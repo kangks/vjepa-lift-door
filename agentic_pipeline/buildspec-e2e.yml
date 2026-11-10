@@ -1,0 +1,270 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - |
+        set -euo pipefail
+        df -h > /tmp/df_before.txt
+        docker version > /tmp/docker_version.txt
+        uname -m | tee /tmp/arch.txt
+        test "$(cat /tmp/arch.txt)" = "aarch64"
+
+  pre_build:
+    commands:
+      - |
+        set -euo pipefail
+        aws ecr get-login-password --region "$REGION" |
+          docker login --username AWS --password-stdin "$ACCOUNT.dkr.ecr.$REGION.amazonaws.com"
+        mkdir -p /tmp/lda/ckpt /tmp/lda/data/lift_dataset /tmp/lda/local_runs/store \
+          /tmp/lda/local_runs/otel /tmp/lda/evidence
+        : > /tmp/lda/evidence/e2e_images.txt
+        for pair in "embed:$REPO_EMBED" "knn:$REPO_KNN" "ticket:$REPO_TICKET" "coordinator:$REPO_COORDINATOR"; do
+          service=${pair%%:*}
+          repo=${pair#*:}
+          docker pull "$repo:$IMAGE_TAG"
+          docker tag "$repo:$IMAGE_TAG" "lda-$service:dev"
+          digest=$(docker inspect --format '{{index .RepoDigests 0}}' "$repo:$IMAGE_TAG")
+          printf '%s %s\n' "$service" "$digest" >> /tmp/lda/evidence/e2e_images.txt
+        done
+        export LDA_CKPT_SHA256=06248f29136a5d26c30e466d717d8845c25341e220f500468c0c162a3317cf20
+        export LDA_CKPT_DIR=/tmp/lda/ckpt
+        export LDA_RUNS_DIR=/tmp/lda/local_runs/store
+        export LDA_OTEL_DIR=/tmp/lda/local_runs/otel
+        aws s3 cp "s3://$BUCKET/models/vjepa21/vitl_ema_encoder_only.pt" /tmp/lda/ckpt/
+        test "$(sha256sum /tmp/lda/ckpt/vitl_ema_encoder_only.pt | cut -d' ' -f1)" = \
+          "06248f29136a5d26c30e466d717d8845c25341e220f500468c0c162a3317cf20"
+        aws s3 cp "s3://$BUCKET/dataset/lift_dataset/" /tmp/lda/data/lift_dataset/ --recursive
+
+  build:
+    commands:
+      - |
+        set -euo pipefail
+        export LDA_CKPT_SHA256=06248f29136a5d26c30e466d717d8845c25341e220f500468c0c162a3317cf20
+        docker compose -f local/docker-compose.yml -f local/docker-compose.codebuild.yml config \
+          > /tmp/compose_config.yml
+        python3 - <<'PY'
+        import yaml
+        from pathlib import Path
+        config = yaml.safe_load(Path("/tmp/compose_config.yml").read_text())
+        allowed = {"AWS_EC2_METADATA_DISABLED"}
+        found = []
+        for service, spec in config["services"].items():
+            environment = spec.get("environment", {})
+            names = list(environment) if isinstance(environment, dict) else [
+                str(item).split("=", 1)[0] for item in environment
+            ]
+            bad = [name for name in names if name.startswith("AWS_") and name not in allowed]
+            assert not bad, (service, bad)
+            found.append(f"{service}: {','.join(sorted(names))}")
+        Path("/tmp/compose_env_check.txt").write_text(
+            "PASS: no AWS_* variables except AWS_EC2_METADATA_DISABLED\n" + "\n".join(found) + "\n"
+        )
+        PY
+        python3.11 -m venv .venv
+        .venv/bin/python -m pip install \
+          -r requirements-core.txt -r requirements-test.txt \
+          boto3 requests fastapi httpx pyyaml anthropic==2.3.0 \
+          aws-opentelemetry-distro==0.22.0 \
+          opentelemetry-instrumentation-fastapi \
+          opentelemetry-instrumentation-requests \
+          opentelemetry-instrumentation-botocore
+        stats_pid=""
+        capture_run_artifacts() {
+          store=/tmp/lda/local_runs/store
+          artifact_root=/tmp/lda/evidence/run_artifacts/store
+          mkdir -p "$artifact_root/runs" "$artifact_root/meta" "$artifact_root/bank" || true
+          for run_dir in "$store"/runs/run-*; do
+            [ -d "$run_dir" ] || continue
+            run_id=${run_dir##*/}
+            target="$artifact_root/runs/$run_id"
+            mkdir -p "$target" || continue
+            for name in detector.json result.json reasoner_request_meta.json; do
+              [ -f "$run_dir/$name" ] && cp "$run_dir/$name" "$target/$name" || true
+            done
+          done
+          for path in "$store"/meta/*.json; do
+            [ -f "$path" ] || continue
+            cp "$path" "$artifact_root/meta/${path##*/}" || true
+          done
+          if [ -f "$store/bank/CURRENT.json" ]; then
+            cp "$store/bank/CURRENT.json" "$artifact_root/bank/CURRENT.json" || true
+            bank_prefix=$(python3 -c \
+              'import json,sys; print(json.load(open(sys.argv[1])).get("bank_prefix", ""))' \
+              "$store/bank/CURRENT.json" 2>/dev/null || true)
+            if [ -n "$bank_prefix" ] && [ -f "$store/$bank_prefix/manifest.json" ]; then
+              mkdir -p "$artifact_root/$(dirname "$bank_prefix")" || true
+              cp "$store/$bank_prefix/manifest.json" \
+                "$artifact_root/$bank_prefix/manifest.json" || true
+            fi
+          fi
+        }
+        copy_trace_otlp() {
+          trace_dir=/tmp/lda/local_runs/otel
+          trace_dest=/tmp/lda/evidence/trace_otlp
+          mkdir -p "$trace_dest" || true
+          for span_file in "$trace_dir"/*.jsonl; do
+            [ -f "$span_file" ] || continue
+            cp "$span_file" "$trace_dest/" || true
+          done
+        }
+        on_exit() {
+          status=$?
+          capture_run_artifacts || true
+          docker compose -f local/docker-compose.yml \
+            -f local/docker-compose.codebuild.yml stop -t 30 >/dev/null 2>&1 || true
+          docker compose -f local/docker-compose.yml \
+            -f local/docker-compose.codebuild.yml ps -a \
+            > /tmp/lda/evidence/compose_ps.txt 2>&1 || true
+          docker compose -f local/docker-compose.yml \
+            -f local/docker-compose.codebuild.yml logs --no-color --timestamps \
+            > /tmp/lda/evidence/compose_logs.txt 2>&1 || true
+          if [ -n "$stats_pid" ]; then
+            kill "$stats_pid" >/dev/null 2>&1 || true
+          fi
+          copy_trace_otlp || true
+          docker compose -f local/docker-compose.yml \
+            -f local/docker-compose.codebuild.yml down >/dev/null 2>&1 || true
+          return "$status"
+        }
+        trap on_exit EXIT
+        .venv/bin/python scripts/local_seed.py \
+          --data /tmp/lda/data/lift_dataset --store /tmp/lda/local_runs/store
+        chmod -R a+rwX /tmp/lda/local_runs
+        compose_started=$(date +%s)
+        docker compose -f local/docker-compose.yml -f local/docker-compose.codebuild.yml \
+          up -d --wait --wait-timeout 900
+        compose_healthy=$(date +%s)
+        docker compose -f local/docker-compose.yml \
+          -f local/docker-compose.codebuild.yml ps -a \
+          > /tmp/lda/evidence/compose_ps.txt
+        printf 'compose_up_time_to_healthy_seconds=%s\n' \
+          "$((compose_healthy - compose_started))" > /tmp/lda/evidence/timings.txt
+        coordinator_id=$(docker compose -f local/docker-compose.yml \
+          -f local/docker-compose.codebuild.yml ps -q coordinator)
+        network_name=$(docker inspect --format \
+          '{{range $name, $cfg := .NetworkSettings.Networks}}{{$name}}{{end}}' "$coordinator_id")
+        docker network inspect "$network_name" > /tmp/compose_network_raw.json
+        python3 - <<'PY'
+        import json
+        from pathlib import Path
+        network = json.loads(Path("/tmp/compose_network_raw.json").read_text())[0]
+        assert network["Internal"] is True
+        Path("/tmp/compose_network.txt").write_text(
+            json.dumps({"Name": network["Name"], "Internal": network["Internal"]}, indent=2) + "\n"
+        )
+        PY
+        (
+          while true; do
+            docker stats --no-stream --format '{{.Name}} {{.MemUsage}}' \
+              >> /tmp/docker_stats.txt 2>&1 || true
+            sleep 30
+          done
+        ) &
+        stats_pid=$!
+
+        docker compose -f local/docker-compose.yml -f local/docker-compose.codebuild.yml run --rm \
+          -v "$PWD/scripts:/app/scripts:ro" \
+          -v /tmp/lda/local_runs/store:/store \
+          -e LDA_STORAGE=file:/store \
+          -e LDA_EMBED_URL=http://embed:8080 \
+          -e LDA_KNN_URL=http://knn:8080/2015-03-31/functions/function/invocations \
+          --entrypoint python coordinator /app/scripts/local_build_bank.py \
+          --store /store --ckpt-sha "$LDA_CKPT_SHA256"
+
+        upload_deadletter() {
+          deadletter_dir=/tmp/lda/local_runs/store/deadletter
+          if [ -n "$(find "$deadletter_dir" -mindepth 1 -maxdepth 1 -type f -print -quit)" ]; then
+            mkdir -p /tmp/lda/evidence/deadletter
+            cp -R "$deadletter_dir/." /tmp/lda/evidence/deadletter/
+            aws s3 cp "$deadletter_dir/" \
+              "s3://$BUCKET/build/out/$IMAGE_TAG/e2e/deadletter/" --recursive || true
+          fi
+        }
+        for scenario in anomaly_door_desync anomaly_interior_light_flicker healthy_ball_reopen healthy_clean \
+          anomaly_desync_ball_crossing anomaly_desync_tree_shadow \
+          anomaly_interior_flicker_balloon_partial stress_balloon_full_occlusion; do
+          chmod -R a+rwX /tmp/lda/local_runs
+          if ! .venv/bin/python scripts/local_run_event.py \
+            --store /tmp/lda/local_runs/store --scenario "$scenario" --timeout 900 \
+            | tee -a /tmp/lda/evidence/runs.txt; then
+            upload_deadletter
+            exit 1
+          fi
+          upload_deadletter
+          if [ "$scenario" = "anomaly_door_desync" ]; then
+            run_id=$(awk '/^run_id/{print $2}' /tmp/lda/evidence/runs.txt | tail -1)
+            {
+              ls -ld /tmp/lda/local_runs/store/runs
+              ls -ld /tmp/lda/local_runs/store/meta
+              ls -ld "/tmp/lda/local_runs/store/runs/$run_id"
+            } > /tmp/lda/evidence/store_perms.txt
+          fi
+        done
+        if ! .venv/bin/python scripts/parity_report.py --store /tmp/lda/local_runs/store \
+          --summary fixtures/results_v2_summary.json \
+          > /tmp/lda/evidence/local_parity.md 2> /tmp/lda/evidence/local_parity.err; then
+          cat /tmp/lda/evidence/local_parity.err
+          echo "parity_report.py failed; see /tmp/lda/evidence/local_parity.err"
+          exit 1
+        fi
+        python3 - <<'PY'
+        from pathlib import Path
+        import re
+        parity = Path("/tmp/lda/evidence/local_parity.md").read_text()
+        if re.search(r"(?i)(F10\s+STOP|parity\s+FAIL|\bBLOCKED\b)", parity):
+            raise SystemExit("F10 parity STOP condition recorded")
+        PY
+        run_id=$(awk '/^run_id/{print $2}' /tmp/lda/evidence/runs.txt | head -1)
+        chmod -R a+rwX /tmp/lda/local_runs
+        if ! .venv/bin/python scripts/local_run_event.py --store /tmp/lda/local_runs/store \
+          --replay-run-id "$run_id" --expect-duplicate --timeout 900 \
+          | tee -a /tmp/lda/evidence/runs.txt; then
+          upload_deadletter
+          exit 1
+        fi
+        upload_deadletter
+        docker compose -f local/docker-compose.yml \
+          -f local/docker-compose.codebuild.yml stop -t 30
+        copy_trace_otlp
+        for run_id in $(awk '/^run_id/{print $2}' /tmp/lda/evidence/runs.txt); do
+          .venv/bin/python scripts/check_trace.py \
+            --otel-dir /tmp/lda/local_runs/otel --run-id "$run_id" --settle-seconds 5
+        done | tee /tmp/lda/evidence/trace_checks.txt
+        cp "/tmp/lda/local_runs/store/runs/$run_id/result.json" /tmp/lda/evidence/result_C1_dryrun.json
+        python3 - <<'PY'
+        import json
+        from pathlib import Path
+        results = Path("/tmp/lda/local_runs/store/runs")
+        rows = []
+        for path in sorted(results.glob("*/result.json")):
+            result = json.loads(path.read_text())
+            rows.append({
+                "run_id": result.get("run_id"),
+                "timings": result.get("timings", {}),
+            })
+        with Path("/tmp/lda/evidence/timings.txt").open("a") as output:
+            output.write("\n".join(json.dumps(row, sort_keys=True) for row in rows) + "\n")
+        PY
+        docker stats --no-stream >> /tmp/docker_stats.txt 2>&1 || true
+        cp /tmp/compose_env_check.txt /tmp/lda/evidence/compose_env_check.txt
+        cp /tmp/compose_network.txt /tmp/lda/evidence/compose_network.txt
+        cp /tmp/docker_stats.txt /tmp/lda/evidence/docker_stats.txt
+        cp /tmp/df_before.txt /tmp/lda/evidence/df_before.txt
+        df -h > /tmp/lda/evidence/df_after.txt
+
+  post_build:
+    commands:
+      - |
+        aws s3 cp /tmp/lda/evidence/ "s3://$BUCKET/build/out/$IMAGE_TAG/e2e/" \
+          --recursive || true
+        for file in /tmp/compose_env_check.txt /tmp/compose_network.txt /tmp/docker_stats.txt \
+          /tmp/df_before.txt /tmp/lda/evidence/df_after.txt; do
+          [ -f "$file" ] && aws s3 cp "$file" \
+            "s3://$BUCKET/build/out/$IMAGE_TAG/e2e/$(basename "$file")" || true
+        done
+      - |
+        test "$CODEBUILD_BUILD_SUCCEEDING" = "1" || {
+          echo "e2e build failed; outputs uploaded"
+          exit 1
+        }

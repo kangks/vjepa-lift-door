@@ -1,0 +1,36 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.venv/
+venv/
+env/
+cdk.out*/
+node_modules/
+*.pem
+*.key
+build/
+dist/
+*.egg-info/
+
+# LaTeX
+*.aux
+*.log
+*.pdf
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# pytest
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# AWS
+.aws-cdk/
+sam-tests/
